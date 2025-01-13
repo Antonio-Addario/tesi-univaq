@@ -1,0 +1,100 @@
+\chapter{Introduction}
+\chapter{Background}
+\thispagestyle{plain}
+
+
+\newacronym{cfd}{CFD}{Computational Fluid Dynamics}
+This chapter presents the section levels that can be used in the template. 
+
+
+\section{Github}
+GitHub is a web-based platform that leverages Git, a distributed version control system, for IT project management and collaboration. 
+The platform is widely used for source control and developer collaboration, making it easier to work in teams on software projects of any scale.
+GitHub combines Git features, such as version management and distributed control, with an intuitive user interface designed to make it easy for developers of all levels to adopt.
+In addition, the platform offers a variety of features that improve collaboration and project management, such as access controls to manage who can view or contribute to projects,
+bug tracking to report and track errors, and feature requests to propose and discuss new ideas.
+It provides task management tools, centralized documentation through wikis, and robust \textit{pull request} management, which facilitate code reviews and secure integration of changes.
+Thanks to these characteristics, GitHub is not only a technical tool, but also an ecosystem that fosters collaboration, transparency and innovation, making it one of the most popular platforms among developers and organizations around the world.
+\section{Pull request}
+A pull request is an essential feature for submitting contributions to a software project, especially in collaborative and open source development contexts.
+Through an intuitive interface, it allows a contributor to notify changes made to a project's source code, allowing other team members to review, discuss, and integrate the changes in a controlled manner, minimizing the risk of anomalies.
+However, the pull request is much more than a simple notification, it is a forum dedicated to discussing the proposed functionality.
+If there are issues with the changes, team members can provide feedback directly within the pull request and even intervene, modifying the functionality via follow-up commits.
+All of this activity, from reviews to comments to code updates, is tracked and centralized within the pull request, making it a fundamental tool for collaborative and transparent change management.
+Pull requests also include crucial information, such as associated commits, related issues, and code changes (diffs), ensuring a structured and efficient review.
+\section{Large language model}
+A large language model (LLM) is an advanced type of language model designed to understand and generate text in complex and general contexts.
+Its main operation is the processing of huge amounts of text data, which allows the model to learn billions of parameters during the training phase.
+These models use advanced machine learning techniques, such as transformative neural networks, to generate coherent and relevant responses. 
+However, their development and operation require significant computational resources, 
+both in terms of training time and execution time, making them particularly expensive and complex to manage.
+Due to their versatility, large language models find application in numerous fields, such as content generation, machine translation, and programming support, demonstrating their usefulness in tackling complex natural language problems.
+
+\section{Use case}
+% from http://wiki.scipy.org/Numpy_Example_List
+\begin{lstlisting}[language=octave]
+octave:1> function xdot = f (x, t)
+>
+>  r = 0.25; k = 1.4;
+>  a = 1.5; b = 0.16; c = 0.9; d = 0.8;
+>
+>  xdot(1) = r*x(1)*(1 - x(1)/k) - a*x(1)*x(2)/(1 + b*x(1));
+>  xdot(2) = c*a*x(1)*x(2)/(1 + b*x(1)) - d*x(2);
+>
+> endfunction
+\end{lstlisting}
+
+
+Donec urna leo, vulputate vitae porta eu, vehicula blandit libero. Phasellus eget massa et leo condimentum mollis. Nullam molestie, justo at pellentesque vulputate, sapien velit ornare diam, nec gravida lacus augue non diam. Integer mattis lacus id libero ultrices sit amet mollis neque molestie. Integer ut leo eget mi volutpat congue. Vivamus sodales, turpis id venenatis placerat, tellus purus adipiscing magna, eu aliquam nibh dolor id nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed cursus convallis quam nec vehicula. Sed vulputate neque eget odio fringilla ac sodales urna feugiat.
+
+\begin{itemize}
+    \item Item 1
+    \item Item 2
+\end{itemize}
+
+Donec urna leo, vulputate vitae porta eu, vehicula blandit libero. Phasellus eget massa et leo condimentum mollis. Nullam molestie, justo at pellentesque vulputate, sapien velit ornare diam, nec gravida lacus augue non diam. Integer mattis lacus id libero ultrices sit amet mollis neque molestie. Integer ut leo eget mi volutpat congue. Vivamus sodales, turpis id venenatis placerat, tellus purus adipiscing magna, eu aliquam nibh dolor id nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed cursus convallis quam nec vehicula. Sed vulputate neque eget odio fringilla ac sodales urna feugiat.
+
+\begin{enumerate}
+    \item Item 1
+    \item Item 2
+\end{enumerate}
+
+% Quando possibile è preferibile usare immagini eps
+\begin{figure}[!ht]
+	\includegraphics[width=0.3\textwidth]{figures/chapter_1/UnivAQ_logoC.eps}
+	\centering
+	\caption{Caption ...}\label{fig:caption_ref_eps}
+\end{figure}
+
+\begin{figure}[!ht]
+	\includegraphics[width=0.3\textwidth]{figures/chapter_1/UnivAQ_logoC.png}
+	\centering
+	\caption{Caption ...}\label{fig:caption_ref_png}
+\end{figure}
+
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll} \hline\hline
+Name & Command\\ \hline
+Chapter & \textbackslash\texttt{chapter\{\emph{Chapter name}\}}\\
+Section & \textbackslash\texttt{section\{\emph{Section name}\}}\\
+Subsection & \textbackslash\texttt{subsection\{\emph{Subsection name}\}}\\
+Subsubsection & \textbackslash\texttt{subsubsection\{\emph{Subsubsection name}\}}\\
+Paragraph & \textbackslash\texttt{paragraph\{\emph{Paragraph name}\}}\\
+Subparagraph & \textbackslash\texttt{paragraph\{\emph{Subparagraph name}\}}\\ \hline\hline
+\end{tabular}
+\end{table}
+\chapter{Pipeline}
+\chapter{Validation}
+\section{Configurations}
+\section{Metrics}
+\section{Dataset}
+\section{results}
+\chapter{Related works}
+\chapter{Conclusions}
+
+
+\paragraph{Paragraph}
+\subparagraph{Subparagraph}
