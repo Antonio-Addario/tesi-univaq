@@ -1,0 +1,167 @@
+\chapter{Background}
+\thispagestyle{plain}
+
+
+\newacronym{cfd}{CFD}{Computational Fluid Dynamics}
+This chapter presents the section levels that can be used in the template. 
+
+
+\section{Github}
+GitHub is a web-based platform that leverages Git, a distributed version control system, for IT project management and collaboration. 
+The platform is widely used for source control and developer collaboration, making it easier to work in teams on software projects of any scale.
+GitHub combines Git features, such as version management and distributed control, with an intuitive user interface designed to make it easy for developers of all levels to adopt.
+In addition, the platform offers a variety of features that improve collaboration and project management, such as access controls to manage who can view or contribute to projects,
+bug tracking to report and track errors, and feature requests to propose and discuss new ideas.
+It provides task management tools, centralized documentation through wikis, and robust \textit{pull request} management, which facilitate code reviews and secure integration of changes.
+Thanks to these characteristics, GitHub is not only a technical tool, but also an ecosystem that fosters collaboration, transparency and innovation, making it one of the most popular platforms among developers and organizations around the world.
+\subsection{Pull request}
+\JDR{Questo va come sottosezione o con la 2.1 nel caso ce solo questo come sottosezione}
+A pull request is an essential feature for submitting contributions to a software project, especially in collaborative and open source development contexts.
+Through an intuitive interface, it allows a contributor to notify changes made to a project's source code, allowing other team members to review, discuss, and integrate the changes in a controlled manner, minimizing the risk of anomalies.
+However, the pull request is much more than a simple notification, it is a forum dedicated to discussing the proposed functionality.
+If there are issues with the changes, team members can provide feedback directly within the pull request and even intervene, modifying the functionality via follow-up commits.
+All of this activity, from reviews to comments to code updates, is tracked and centralized within the pull request, making it a fundamental tool for collaborative and transparent change management.
+Pull requests also include crucial information, such as associated commits, related issues, and code changes (diffs), ensuring a structured and efficient review.
+\section{Large language model}
+A large language model (LLM) is an advanced type of language model designed to understand and generate text in complex and general contexts.
+Its main operation is the processing of huge amounts of text data, which allows the model to learn billions of parameters during the training phase.
+These models use advanced machine learning techniques, such as transformative neural networks, to generate coherent and relevant responses. 
+However, their development and operation require significant computational resources, 
+both in terms of training time and execution time, making them particularly expensive and complex to manage.
+Due to their versatility, large language models find application in numerous fields, such as content generation, machine translation, and programming support, demonstrating their usefulness in tackling complex natural language problems.
+
+\section{Use Case: Automatically Generate Pull Request Messages}
+In collaborative software development, managing pull requests (PRs) is essential. Each pull request includes essential metadata such as the title, message body, associated commits, code changes (diffs), and associated issues. Writing descriptive and meaningful PR messages is a subjective task and can vary in quality and detail among contributors.
+\subsection{Problem}
+\begin{itemize}
+	\item The quality of pull request messages can negatively impact code review, slowing down decision-making and increasing the risk of errors.
+	\item Writing messages manually is time-consuming and may not meet documentation standards, especially in distributed or open source teams.
+	\subsection{Use Case Goal}
+	Use a \textit{large language model (LLM)} by providing it with a specific dataset, integrating \textit{metadata} and \textit{code changes}, to automatically generate accurate, clear, and informative pull request messages such as title or body message.
+	\subsection{Usage Flow}
+	\subsubsection{Body Message Generation}
+	\begin{enumerate}
+		\item A contributor creates a pull request on a GitHub repository.
+		\item The system collects data about the pull request, including:
+		\begin{itemize}
+			\item The proposed title.
+			\item The commit message.
+			\item The changes to the code (\textit{diff}).
+			\item Any associated issues with comments from contributors.
+		\end{itemize}
+		\item The LLM model processes this data as input and generates:
+		\begin{itemize}
+			\item A detailed message body highlighting the changes, reasons, and impacts.
+		\end{itemize}
+		\item The result is returned to the user, who can accept, edit, or improve it.
+	\end{enumerate}
+	\subsubsection{Title Generation}
+	\begin{enumerate}
+		\item A contributor creates a pull request on a GitHub repository.
+		\item The system collects data about the pull request, including:
+		\begin{itemize}
+			\item The body message.
+			\item The commit message.
+			\item The changes to the code (\textit{diff}).
+			\item Any associated issues with comments from contributors.
+		\end{itemize}
+		\item The LLM model processes this data as input and generates:
+		\begin{itemize}
+			\item A descriptive title for the pull request.
+		\end{itemize}
+		\item The result is returned to the user, who can accept, edit, or improve it.
+	\end{enumerate}
+\end{itemize}
+\chapter{Proposed Approach}
+This chapter illustrates the workflow developed in the context of my thesis, integrating the activities carried out during the internship. These activities have represented the foundations on which the research work presented in this thesis is based.
+\section{Dataset Creation}
+\JDR{probabilmente va spostato nel capitolo successivo}
+The creation of the dataset was a fundamental part of this work, it was built by collecting data from GitHub repositories, selected according to defined criteria to ensure quality and representativeness. Each pull request was analyzed to extract key information, including the title, the descriptive message, the commit and the diff, ensuring a complete coverage of the information useful to the model.
+The resulting dataset is made publicly available at \href{https://zenodo.org/records/14546914?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjBhODI4NDk5LTdlODItNDZhZS1iZDgwLWEwNDUwMWQyOTg3YSIsImRhdGEiOnt9LCJyYW5kb20iOiIzZTFjYTBmMjkxMGRkNmVkYTY5M2Y2ZDFlODAyYTdmYyJ9.IiQkMkHUAq2AzlhwHkaLyXBMDycStf--_gtWm1ZCQadw9IFWeaJakTNiXLE4PNPnm-cPYi63f1vPUfEy-lyo_Q}{Zenodo}, thus contributing to the scientific community for further studies and applications in the field of natural language processing and collaborative software development.
+\begin{figure}[H] 
+	\centering
+	\includegraphics[width=\linewidth]{figures/schemaMining5-2.png}
+\end{figure}
+\subsection{Choice of repositories}
+The initial selection focused on projects written in Java, chosen for its popularity and significant number of pull requests. This language guarantees a \textbf{rich and relevant database}, since well-known projects in Java tend to have an active community and significant pull requests.
+
+\subsection{Defining the minimum threshold of stars}
+To ensure the quality of the projects, I initially set a minimum threshold of stars of ( $\geq 1000$ ). Repositories with a high number of stars are usually ``famous'', have an \textbf{active community} and generate more \textbf{relevant} and high-quality pull requests.
+Subsequently, to \textbf{enlarge the dataset} while maintaining a good level of quality, the threshold was lowered to \( \geq 500 \) stars.
+
+\subsection{Introduction of the forks filter}
+In addition to the star threshold, I introduced a filter based on the number of forks, requiring it to be $> 50$. This criterion ensures that the repositories \textbf{have been used and adapted} by other developers, indicate a certain \textbf{level of trust} and usefulness of the project.
+
+Applying these criteria, I obtained a total of \textbf{3539 projects}.
+
+\subsection{Filtering based on the number of pull requests}
+To maintain a \textbf{high standard of data quality}, an additional filter was introduced: only repositories with \textbf{more than 20 pull requests} were retained.
+
+This choice is motivated by the desire to represent \textbf{active projects} and with a consistent workflow, guarantee a \textbf{sufficient amount of data} to effectively train the language model.
+
+\subsection{Final result}
+After a thorough filtering and refinement process, the initial set of repositories was reduced to 507 projects. However, during the data mining phase, the extraction was intentionally stopped at 246 repositories. This is because the amount of data collected turned out to be more than sufficient for the project goals. Therefore, the final dataset is composed of \textbf{246 repositories}, each selected based on stringent criteria, such as a \textbf{minimum number of stars} (\( \geq 500 \)) and a \textbf{high number of pull requests} (\( > 20 \)).
+These projects ensure a high-quality dataset, useful for representing \textbf{software development practices} in real contexts and for \textbf{training} the language model.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/logo/distribuzione_stelle.png}
+	\caption{Stars distribution on final dataset}       
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/logo/DistribuzioneRepository.png}
+	\caption{pull requests distribution on final dataset}       
+\end{figure}
+This figure illustrates the distribution of repositories by number of pull requests (PRs), showing a "long tail distribution" typical of open source projects. Most repositories have a moderate number of PRs (100-5000), with a peak between 1000-2500 PRs. A reduction is observed in repositories with few PRs (20-50) and in those with extremely high PRs (over 5000), where only a few core projects attract significant contributions. The upper ranges, over 10000 PRs, represent the most active and relevant projects for the community, while most repositories show more moderate activity.
+\subsection{Dataset structure}
+\JDR{Non so se ci va questa parte}
+The dataset is composed of two collections:
+The first one containing all the names of the processed repositories structured like this:
+\newline
+\textbf{\_id:} Unique ID automatically generated for each document.
+\newline
+\textbf{repository\_name:} Name of the repository.
+\newline
+Each document contains a unique ID automatically generated by mongodb after an insert and the repository name.
+The second collection contains all the pull requests, saved individually and associated with their respective repository, thus creating a relationship and aggregating the relevant information.
+\newline
+\textbf{\_id:} Unique id automatically generated for each document.
+\newline
+\textbf{repository\_id:} Reference to the repository associated with the pull request.
+\newline
+\textbf{PR Title:} Indicates the main focus or change introduced in the pull request.
+\newline
+\textbf{PR Message (Body):} Provides a detailed description of the content and changes made in the PR.
+\newline
+\textbf{PR Diff:} Shows the changes made to the code, represented by the diff (including additions, changes, and removals of lines).
+\newline
+\textbf{Commit Message:} Describes the major change in the code, associated with the first commit of the PR.
+\newline
+\textbf{Closed Issues:} If the pull request closes one or more issues, those issues are logged and associated with the PR, with the issue number and title.
+\newline
+\textbf{Issue Number:} The associated issue ID number, if any.
+\newline
+\textbf{Issue Close Date:} The date and time the issue was closed, if applicable.
+\newline
+\textbf{Issue Comments:} Any comments logged about the issue, providing additional detail or context.
+\newline
+\textbf{Pull Request Creation Date:} The date and time the pull request was created.
+\newline
+This structure allows to maintain a high granularity of information, facilitating the training of the model and the subsequent analysis of the results.
+\subsection{Conclusion}
+The obtained dataset provides a solid basis for training an LLM model able to predict pull request messages. The use of advanced techniques for data extraction allowed to collect complete and well-structured information. The next step will be the training of the model and the evaluation of its performance on the basis of the dataset built during this internship.
+\section{Preliminary Prompting Tests}
+In the initial phase of the project, prompting tests were conducted using \textit{ChatGPT} to explore how a language model could generate titles for pull requests based on simple metadata. These tests allowed us to try different types of prompts and observe how the model responded, with the goal of better understanding how the model works and gathering useful insights to structure the prompts to be used in subsequent experiments. This initial phase proved useful to prepare the work with the LLM and improve its performance according to the needs of the project.
+\section{Code structuring}
+
+\chapter{Validation}
+\section{Configurations}
+\section{Metrics}
+\section{Dataset}
+\section{Results}
+\chapter{Related works}
+\chapter{Conclusions}
+
+
+\paragraph{Paragraph}
+\subparagraph{Subparagraph}
