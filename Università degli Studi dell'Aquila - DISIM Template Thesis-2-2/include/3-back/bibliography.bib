@@ -1,0 +1,200 @@
+
+@inproceedings{vegas_evidence-based_2024,
+	address = {New York, NY, USA},
+	series = {{ESEM} '24},
+	title = {Evidence-{Based} {Commit} {Message} {Generation} with {Deep} {Learning} {Techniques} ({EvidenCoM})},
+	isbn = {979-8-4007-1047-6},
+	url = {https://dl.acm.org/doi/10.1145/3674805.3695395},
+	doi = {10.1145/3674805.3695395},
+	abstract = {Context. Automatic code commit message generation tools using deep learning techniques have gained significant attention in recent years. Although many experiments with these tools have been reported, there is no current evidence on which of them performs best. Objective. This project aims to provide evidence on the set of proposed tools. Method. We will conduct a secondary study, consisting of a systematic review that includes evidence synthesis. Results. We have identified the set of primary studies and extracted the information from them. The next steps include obtaining evidence from the extracted information.},
+	urldate = {2024-11-27},
+	booktitle = {Proceedings of the 18th {ACM}/{IEEE} {International} {Symposium} on {Empirical} {Software} {Engineering} and {Measurement}},
+	publisher = {Association for Computing Machinery},
+	author = {Vegas, Sira and Ferre, Xavier and Zhu, Hongming},
+	year = {2024},
+	pages = {613--615},
+	file = {Full Text PDF:C\:\\Users\\claud\\Zotero\\storage\\TLM87Z3E\\Vegas et al. - 2024 - Evidence-Based Commit Message Generation with Deep Learning Techniques (EvidenCoM).pdf:application/pdf},
+}
+
+
+@inproceedings{jiang_automatically_2017,
+	address = {Urbana-Champaign, IL, USA},
+	series = {{ASE} '17},
+	title = {Automatically generating commit messages from diffs using neural machine translation},
+	isbn = {978-1-5386-2684-9},
+	abstract = {Commit messages are a valuable resource in comprehension of software evolution, since they provide a record of changes such as feature additions and bug repairs. Unfortunately, programmers often neglect to write good commit messages. Different techniques have been proposed to help programmers by automatically writing these messages. These techniques are effective at describing what changed, but are often verbose and lack context for understanding the rationale behind a change. In contrast, humans write messages that are short and summarize the high level rationale. In this paper, we adapt Neural Machine Translation (NMT) to automatically ``translate'' diffs into commit messages. We trained an NMT algorithm using a corpus of diffs and human-written commit messages from the top 1k Github projects. We designed a filter to help ensure that we only trained the algorithm on higher-quality commit messages. Our evaluation uncovered a pattern in which the messages we generate tend to be either very high or very low quality. Therefore, we created a quality-assurance filter to detect cases in which we are unable to produce good messages, and return a warning instead.},
+	urldate = {2024-11-27},
+	booktitle = {Proceedings of the 32nd {IEEE}/{ACM} {International} {Conference} on {Automated} {Software} {Engineering}},
+	publisher = {IEEE Press},
+	author = {Jiang, Siyuan and Armaly, Ameer and McMillan, Collin},
+	year = {2017},
+	pages = {135--146},
+	file = {Full Text PDF:C\:\\Users\\claud\\Zotero\\storage\\EPSH67FQ\\Jiang et al. - 2017 - Automatically generating commit messages from diffs using neural machine translation.pdf:application/pdf},
+}
+
+@inproceedings{liu_neural-machine-translation-based_2018,
+	address = {New York, NY, USA},
+	series = {{ASE} '18},
+	title = {Neural-machine-translation-based commit message generation: how far are we?},
+	isbn = {978-1-4503-5937-5},
+	shorttitle = {Neural-machine-translation-based commit message generation},
+	url = {https://dl.acm.org/doi/10.1145/3238147.3238190},
+	doi = {10.1145/3238147.3238190},
+	abstract = {Commit messages can be regarded as the documentation of software changes. These messages describe the content and purposes of changes, hence are useful for program comprehension and software maintenance. However, due to the lack of time and direct motivation, commit messages sometimes are neglected by developers. To address this problem, Jiang et al. proposed an approach (we refer to it as NMT), which leverages a neural machine translation algorithm to automatically generate short commit messages from code. The reported performance of their approach is promising, however, they did not explore why their approach performs well. Thus, in this paper, we first perform an in-depth analysis of their experimental results. We find that (1) Most of the test \&lt;pre\&gt;diffs\&lt;/pre\&gt; from which NMT can generate high-quality messages are similar to one or more training \&lt;pre\&gt;diffs\&lt;/pre\&gt; at the token level. (2) About 16\% of the commit messages in Jiang et al.’s dataset are noisy due to being automatically generated or due to them describing repetitive trivial changes. (3) The performance of NMT declines by a large amount after removing such noisy commit messages. In addition, NMT is complicated and time-consuming. Inspired by our first finding, we proposed a simpler and faster approach, named NNGen (Nearest Neighbor Generator), to generate concise commit messages using the nearest neighbor algorithm. Our experimental results show that NNGen is over 2,600 times faster than NMT, and outperforms NMT in terms of BLEU (an accuracy measure that is widely used to evaluate machine translation systems) by 21\%. Finally, we also discuss some observations for the road ahead for automated commit message generation to inspire other researchers.},
+	urldate = {2024-11-27},
+	booktitle = {Proceedings of the 33rd {ACM}/{IEEE} {International} {Conference} on {Automated} {Software} {Engineering}},
+	publisher = {Association for Computing Machinery},
+	author = {Liu, Zhongxin and Xia, Xin and Hassan, Ahmed E. and Lo, David and Xing, Zhenchang and Wang, Xinyu},
+	year = {2018},
+	pages = {373--384},
+	file = {Full Text PDF:C\:\\Users\\claud\\Zotero\\storage\\Y6Y8FFXY\\Liu et al. - 2018 - Neural-machine-translation-based commit message generation how far are we.pdf:application/pdf},
+}
+
+@inproceedings{dong_fira_2022,
+	title = {{FIRA}: {Fine}-{Grained} {Graph}-{Based} {Code} {Change} {Representation} for {Automated} {Commit} {Message} {Generation}},
+	shorttitle = {{FIRA}},
+	url = {https://ieeexplore.ieee.org/document/9793882},
+	doi = {10.1145/3510003.3510069},
+	abstract = {Commit messages summarize code changes of each commit in nat-ural language, which help developers understand code changes without digging into detailed implementations and play an essen-tial role in comprehending software evolution. To alleviate human efforts in writing commit messages, researchers have proposed var-ious automated techniques to generate commit messages, including template-based, information retrieval-based, and learning-based techniques. Although promising, previous techniques have limited effectiveness due to their coarse-grained code change representations. This work proposes a novel commit message generation technique, FIRA, which first represents code changes via fine-grained graphs and then learns to generate commit messages automati-cally. Different from previous techniques, FIRA represents the code changes with fine-grained graphs, which explicitly describe the code edit operations between the old version and the new version, and code tokens at different granularities (i.e., sub-tokens and integral tokens). Based on the graph-based representation, FIRA generates commit messages by a generation model, which includes a graph-neural-network-based encoder and a transformer-based decoder. To make both sub-tokens and integral tokens as available ingredients for commit message generation, the decoder is further incorporated with a novel dual copy mechanism. We further per-form an extensive study to evaluate the effectiveness of FIRA. Our quantitative results show that FIRA outperforms state-of-the-art techniques in terms of BLEU, ROUGE-L, and METEOR; and our ablation analysis further shows that major components in our technique both positively contribute to the effectiveness of FIRA. In addition, we further perform a human study to evaluate the quality of generated commit messages from the perspective of developers, and the results consistently show the effectiveness of FIRA over the compared techniques.},
+	urldate = {2024-11-27},
+	booktitle = {2022 {IEEE}/{ACM} 44th {International} {Conference} on {Software} {Engineering} ({ICSE})},
+	author = {Dong, Jinhao and Lou, Yiling and Zhu, Qihao and Sun, Zeyu and Li, Zhilin and Zhang, Wenjie and Hao, Dan},
+	month = may,
+	year = {2022},
+	note = {ISSN: 1558-1225},
+	keywords = {Software, Graph neural networks, Codes, Transformers, Writing, Benchmark testing, Code Change Representation, Commit Message Generation, Graph Neural Network, Vocabulary},
+	pages = {970--981},
+	file = {Full Text PDF:C\:\\Users\\claud\\Zotero\\storage\\6KN298C6\\Dong et al. - 2022 - FIRA Fine-Grained Graph-Based Code Change Representation for Automated Commit Message Generation.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\claud\\Zotero\\storage\\5RKCHZBI\\9793882.html:text/html},
+}
+
+@article{ghadhab_augmenting_2021,
+	title = {Augmenting commit classification by using fine-grained source code changes and a pre-trained deep neural language model},
+	volume = {135},
+	issn = {0950-5849},
+	url = {https://www.sciencedirect.com/science/article/pii/S0950584921000495},
+	doi = {10.1016/j.infsof.2021.106566},
+	abstract = {Context:
+Analyzing software maintenance activities is very helpful in ensuring cost-effective evolution and development activities. The categorization of commits into maintenance tasks supports practitioners in making decisions about resource allocation and managing technical debt.
+Objective:
+In this paper, we propose to use a pre-trained language neural model, namely BERT (Bidirectional Encoder Representations from Transformers) for the classification of commits into three categories of maintenance tasks — corrective, perfective and adaptive. The proposed commit classification approach will help the classifier better understand the context of each word in the commit message.
+Methods:
+We built a balanced dataset of 1793 labeled commits that we collected from publicly available datasets. We used several popular code change distillers to extract fine-grained code changes that we have incorporated into our dataset as additional features to BERT’s word representation features. In our study, a deep neural network (DNN) classifier has been used as an additional layer to fine-tune the BERT model on the task of commit classification. Several models have been evaluated to come up with a deep analysis of the impact of code changes on the classification performance of each commit category.
+Results and conclusions:
+Experimental results have shown that the DNN model trained on BERT’s word representations and Fixminer code changes (DNN@BERT+Fix\_cc) provided the best performance and achieved 79.66\% accuracy and a macro-average f1 score of 0.8. Comparison with the state-of-the-art model that combines keywords and code changes (RF@KW+CD\_cc) has shown that our model achieved approximately 8\% improvement in accuracy. Results have also shown that a DNN model using only BERT’s word representation features achieved an improvement of 5\% in accuracy compared to the RF@KW+CD\_cc model.},
+	urldate = {2024-11-27},
+	journal = {Information and Software Technology},
+	author = {Ghadhab, Lobna and Jenhani, Ilyes and Mkaouer, Mohamed Wiem and Ben Messaoud, Montassar},
+	month = jul,
+	year = {2021},
+	keywords = {Software maintenance, Code changes, Commit classification, Deep neural networks, Pre-trained neural language model},
+	pages = {106566},
+	file = {ScienceDirect Full Text PDF:C\:\\Users\\claud\\Zotero\\storage\\M23ZZ3F7\\Ghadhab et al. - 2021 - Augmenting commit classification by using fine-grained source code changes and a pre-trained deep ne.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\claud\\Zotero\\storage\\F4AL7SKS\\S0950584921000495.html:text/html},
+}
+
+@article{tao_large-scale_2022,
+	title = {A large-scale empirical study of commit message generation: models, datasets and evaluation},
+	volume = {27},
+	issn = {1573-7616},
+	shorttitle = {A large-scale empirical study of commit message generation},
+	url = {https://doi.org/10.1007/s10664-022-10219-1},
+	doi = {10.1007/s10664-022-10219-1},
+	abstract = {Commit messages are natural language descriptions of code changes, which are important for program understanding and maintenance. However, writing commit messages manually is time-consuming and laborious, especially when the code is updated frequently. Various approaches utilizing generation or retrieval techniques have been proposed to automatically generate commit messages. To achieve a better understanding of how the existing approaches perform in solving this problem, this paper conducts a systematic and in-depth analysis of the state-of-the-art models and datasets. We find that: (1) Different variants of the BLEU metric used in previous works affect the evaluation. (2) Most datasets are crawled only from Java repositories while repositories in other programming languages are not sufficiently explored. (3) Dataset splitting strategies can influence the performance of existing models by a large margin. (4) For pre-trained models, fune-tuning with different multi-programming-language combinations can influence their performance. Based on these findings, we collect a large-scale, information-rich, M ulti-language C ommit M essage D ataset (MCMD). Using MCMD, we conduct extensive experiments under different experiment settings including splitting strategies and multi-programming-language combinations. Furthermore, we provide suggestions for comprehensively evaluating commit message generation models and discuss possible future research directions. We believe our work can help practitioners and researchers better evaluate and select models for automatic commit message generation. Our source code and data are available at https://anonymous.4open.science/r/CommitMessageEmpirical.},
+	language = {en},
+	number = {7},
+	urldate = {2024-11-27},
+	journal = {Empirical Software Engineering},
+	author = {Tao, Wei and Wang, Yanlin and Shi, Ensheng and Du, Lun and Han, Shi and Zhang, Hongyu and Zhang, Dongmei and Zhang, Wenqiang},
+	month = oct,
+	year = {2022},
+	keywords = {Dataset, Empirical study, Evaluation, Commit message generation, Multi-lingual programming languages},
+	pages = {198},
+	file = {Full Text PDF:C\:\\Users\\claud\\Zotero\\storage\\2HD9572W\\Tao et al. - 2022 - A large-scale empirical study of commit message generation models, datasets and evaluation.pdf:application/pdf},
+}
+
+@article{fang_prhan_2022,
+	title = {{PRHAN}: {Automated} {Pull} {Request} {Description} {Generation} {Based} on {Hybrid} {Attention} {Network}},
+	volume = {185},
+	issn = {0164-1212},
+	shorttitle = {{PRHAN}},
+	url = {https://www.sciencedirect.com/science/article/pii/S016412122100248X},
+	doi = {10.1016/j.jss.2021.111160},
+	abstract = {Descriptions of pull requests (PRs) are posted by developers for describing the modifications that they have made and the corresponding reasons in these PRs. Although PRs help developers improve the development efficiency, some developers usually ignore writing the descriptions for PRs. To alleviate the above problem, researchers generally utilize text summarization model to automatically generate descriptions for PRs. However, current RNN-based models still face the challenges such as low efficiency and out-of-vocabulary (OOV), which may influence the further performance improvement to their models. To break this bottleneck, we propose a novel model aiming at the above challenges, named PRHAN (Pull Requests Description Generation Based on Hybrid Attention Network). Specifically, the core of PRHAN is the hybrid attention network, which has faster execution efficiency than RNN-based model. Moreover, we address the OOV problem by the utilizing byte-pair encoding algorithm to build a vocabulary at the sub-word level. Such a vocabulary can represent the OOV words by combining sub-word units. To reduce the sensitivity of the model, we take a simple but effective method into the cross-entropy loss function, named label smoothing. We choose three baseline models, including LeadCM, Transformer and the state-of-the-art model built by Liu et al. and evaluate all the models on the open-source dataset through ROUGE, BLEU, and human evaluation. The experimental results demonstrate that PRHAN is more effective than baselines. Moreover, PRHAN can execute faster than the state-of-the-art model proposed by Liu et al.},
+	urldate = {2024-11-27},
+	journal = {Journal of Systems and Software},
+	author = {Fang, Sen and Zhang, Tao and Tan, You-Shuai and Xu, Zhou and Yuan, Zhi-Xin and Meng, Ling-Ze},
+	month = mar,
+	year = {2022},
+	keywords = {Byte-pair encoding, Hybrid attention, Label smoothing, PR description},
+	pages = {111160},
+	file = {ScienceDirect Full Text PDF:C\:\\Users\\claud\\Zotero\\storage\\EM3MAHHJ\\Fang et al. - 2022 - PRHAN Automated Pull Request Description Generation Based on Hybrid Attention Network.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\claud\\Zotero\\storage\\E3CNEH6L\\S016412122100248X.html:text/html},
+}
+@inproceedings{jung-2021-commitbert,
+    title = "{C}ommit{BERT}: Commit Message Generation Using Pre-Trained Programming Language Model",
+    author = "Jung, Tae Hwan",
+    editor = "Lachmy, Royi  and
+      Yao, Ziyu  and
+      Durrett, Greg  and
+      Gligoric, Milos  and
+      Li, Junyi Jessy  and
+      Mooney, Ray  and
+      Neubig, Graham  and
+      Su, Yu  and
+      Sun, Huan  and
+      Tsarfaty, Reut",
+    booktitle = "Proceedings of the 1st Workshop on Natural Language Processing for Programming (NLP4Prog 2021)",
+    month = aug,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.nlp4prog-1.3/",
+    doi = "10.18653/v1/2021.nlp4prog-1.3",
+    pages = "26--33",
+    abstract = "Commit message is a document that summarizes source code changes in natural language. A good commit message clearly shows the source code changes, so this enhances collaboration between developers. Therefore, our work is to develop a model that automatically writes the commit message. To this end, we release 345K datasets consisting of code modification and commit messages in six programming languages (Python, PHP, Go, Java, JavaScript, and Ruby). Similar to the neural machine translation (NMT) model, using our dataset, we feed the code modification to the encoder input and the commit message to the decoder input and measure the result of the generated commit message with BLEU-4. Also, we propose the following two training methods to improve the result of generating the commit message: (1) A method of preprocessing the input to feed the code modification to the encoder input. (2) A method that uses an initial weight suitable for the code domain to reduce the gap in contextual representation between programming language (PL) and natural language (NL)."
+}
+@INPROCEEDINGS{8952330,
+  author={Liu, Zhongxin and Xia, Xin and Treude, Christoph and Lo, David and Li, Shanping},
+  booktitle={2019 34th IEEE/ACM International Conference on Automated Software Engineering (ASE)}, 
+  title={Automatic Generation of Pull Request Descriptions}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={176-188},
+  keywords={Decoding;Training;Task analysis;Generators;Software;Measurement;Writing;Pull Request;Document Generation;Sequence to Sequence Learning},
+  doi={10.1109/ASE.2019.00026}}
+@inproceedings{10.1145/3604915.3610647,
+author = {Acharya, Arkadeep and Singh, Brijraj and Onoe, Naoyuki},
+title = {LLM Based Generation of Item-Description for Recommendation System},
+year = {2023},
+isbn = {9798400702419},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3604915.3610647},
+doi = {10.1145/3604915.3610647},
+abstract = {The description of an item plays a pivotal role in providing concise and informative summaries to captivate potential viewers and is essential for recommendation systems. Traditionally, such descriptions were obtained through manual web scraping techniques, which are time-consuming and susceptible to data inconsistencies. In recent years, Large Language Models (LLMs), such as GPT-3.5, and open source LLMs like Alpaca have emerged as powerful tools for natural language processing tasks. In this paper, we have explored how we can use LLMs to generate detailed descriptions of the items. To conduct the study, we have used the MovieLens 1M dataset comprising movie titles and the Goodreads Dataset consisting of names of books and subsequently, an open-sourced LLM, Alpaca, was prompted with few-shot prompting on this dataset to generate detailed movie descriptions considering multiple features like the names of the cast and directors for the ML dataset and the names of the author and publisher for the Goodreads dataset. The generated description was then compared with the scraped descriptions using a combination of Top Hits, MRR, and NDCG as evaluation metrics. The results demonstrated that LLM-based movie description generation exhibits significant promise, with results comparable to the ones obtained by web-scraped descriptions.},
+booktitle = {Proceedings of the 17th ACM Conference on Recommender Systems},
+pages = {1204–1207},
+numpages = {4},
+keywords = {Large Language Models (LLMs), NLP, automated content generation., web scraping},
+location = {Singapore, Singapore},
+series = {RecSys '23}
+}
+@misc{atlassian_pull_request,
+  author    = {Atlassian},
+  title     = {Making a pull request},
+  year      = {n.d.},
+  url       = {https://www.atlassian.com/git/tutorials/making-a-pull-request}
+}
+@article{prof,
+	abstract = {Model-driven engineering (MDE) has seen significant advancements with the integration of machine learning (ML) and deep learning techniques. Building upon the groundwork of previous investigations, our study provides a concise overview of current large language models (LLMs) applications in MDE, emphasizing their role in automating tasks like model repository classification and developing advanced recommender systems. The paper also outlines the technical considerations for seamlessly integrating LLMs in MDE, offering a practical guide for researchers and practitioners. Looking forward, the paper proposes a focused research agenda for the future interplay of LLMs and MDE, identifying key challenges and opportunities. This concise roadmap envisions the deployment of LLM techniques to enhance the management, exploration, and evolution of modeling ecosystems. Moreover, we also discuss the adoption of LLMs in various domains by means of model-driven techniques and tools, i.e., MDE for supporting LLMs. By offering a compact exploration of LLMs in MDE, this paper contributes to the ongoing evolution of MDE practices, providing a forward-looking perspective on the transformative role of large language models in software engineering and model-driven practices.},
+	author = {Di Rocco, Juri and Di Ruscio, Davide and Di Sipio, Claudio and Nguyen, Phuong T. and Rubei, Riccardo},
+	date = {2025/01/31},
+	date-added = {2025-02-11 17:24:31 +0100},
+	date-modified = {2025-02-11 17:24:31 +0100},
+	doi = {10.1007/s10270-025-01263-8},
+	id = {Di Rocco2025},
+	isbn = {1619-1374},
+	journal = {Software and Systems Modeling},
+	title = {On the use of large language models in model-driven engineering},
+	url = {https://doi.org/10.1007/s10270-025-01263-8},
+	year = {2025},
+	bdsk-url-1 = {https://doi.org/10.1007/s10270-025-01263-8}}

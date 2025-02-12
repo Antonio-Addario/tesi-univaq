@@ -1,0 +1,298 @@
+\chapter{Validation}\label{chap:validation}
+\section{Research questions}
+In this section, are defined the research questions that guide my study. My experiments are structured into two main categories: title generation and body message generation. Each category aims to address specific challenges in generating meaningful and contextually relevant messages for pull requests. The research questions (RQ) formulated are as follows:
+
+\subsection{RQ1: How effective is the model in generating accurate and relevant pull request titles?}
+The first research question examines the model's ability to generate concise yet informative pull request titles based on the available metadata. Since the title serves as a high-level summary of the pull request, it is critical that the generated titles maintain consistency, relevance, and informativeness. To assess this, we analyze the model's performance using multiple evaluation metrics and compare the generated titles to real titles.
+
+\subsection{RQ2: How effective is the model in generating meaningful and contextually sensitive pull request body messages?}
+The second research question focuses on the generation of pull request body messages. Unlike titles, body messages are more detailed and require a deeper understanding of code changes, commit messages, and diff details. The goal is to evaluate whether the model can produce body messages that are in line with the developer's intent while maintaining clarity and completeness. This evaluation is performed as in the first research question using different text evaluation metrics, comparing the model output with the actual body message.
+\section{Methodology and metrics}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/Methodology.png}
+    \caption{Validation methodology}
+\end{figure}
+The main loop iterates through the projects and their test set of associated PRs. For each PR:
+
+\begin{enumerate}
+\item A title or body message is generated using the LLM.
+\item Contextual information is retrieved from the training set. However, in a specific experiment, contextual information is randomly taken from a larger collection containing all PRs from all projects, in order to test the effectiveness of more general or diverse contexts.
+\item Metrics are computed and the results are stored in the database.
+\end{enumerate}
+
+Each project is processed independently, ensuring modularity and scalability.
+\subsection{Metrics}
+
+The quality of the generated PR headlines is evaluated using the following metrics:
+
+\paragraph{BLEU (Bilingual Evaluation Understudy)}
+The BLEU score measures the n-gram overlap between the actual and predicted headlines. It is computed as:
+
+\begin{equation}
+\text{BLEU} = \text{BP} \cdot \exp \left( \sum_{n=1}^{N} w_n \log p_n \right)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( p_n \) is the precision for n-grams of size \( n \).
+    \item \( w_n \) is the weight assigned to n-grams (often equal for simplicity).
+    \item \( \text{BP} \) is the \textit{brevity penalty}, which penalizes short predictions:
+\end{itemize}
+
+\begin{equation}
+\text{BP} =
+\begin{cases}
+1, & \text{if } c > r \\
+e^{(1 - r/c)}, & \text{if } c \leq r
+\end{cases}
+\end{equation}
+
+where \( c \) is the length of the generated sentence and \( r \) is the length of the reference sentence.
+The \texttt{nltk} implementation is used to calculate the BLEU score.
+
+\paragraph{METEOR (Metric for Evaluation of Translation with Explicit ORdering)}
+The METEOR score evaluates the semantic similarity between the actual and predicted headlines by considering exact word matches, synonyms, stemming, and paraphrasing. It is computed as:
+
+\begin{equation}
+\text{METEOR} = F_{\text{mean}} \cdot (1 - \gamma P_{\text{frag}})
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( F_{\text{mean}} \) is a weighted harmonic mean of precision and recall.
+    \item \( P_{\text{frag}} \) is a fragmentation penalty based on the number of chunks.
+    \item \( \gamma \) is a parameter controlling the fragmentation penalty's impact.
+\end{itemize}
+
+The \texttt{nltk} implementation is used to calculate the METEOR score.
+
+\paragraph{Cosine Similarity}
+The Cosine Similarity metric measures the similarity between the embeddings of the actual and predicted headlines. It is defined as:
+
+\begin{equation}
+\text{CosSim}(A, B) = \frac{A \cdot B}{\|A\| \|B\|}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \( A \) and \( B \) are the vector representations (embeddings) of the actual and generated headlines.
+    \item \( \|A\| \) and \( \|B\| \) are their Euclidean norms.
+\end{itemize}
+\texttt{SentenceTransformer} is used to generate the embeddings and calculate the cosine similarity.
+
+\section{Dataset}
+This chapter is broader and more detailed as it represents an integral part of my internship.
+The creation of the dataset was a fundamental part of this work, it was built by collecting data from GitHub repositories, selected according to defined criteria to ensure quality and representativeness. Each pull request was analyzed to extract key information, including the title, the descriptive message, the commit and the diff, ensuring a complete coverage of the information useful to the model. The obtained dataset provides a solid basis for training an LLM able to predict pull request messages. The use of advanced techniques for data extraction allowed to collect complete and well-structured information. The next step will be the training of the model and the evaluation of its performance on the basis of the dataset built during this internship.
+The resulting dataset is made publicly available at \href{https://zenodo.org/records/14546914?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjBhODI4NDk5LTdlODItNDZhZS1iZDgwLWEwNDUwMWQyOTg3YSIsImRhdGEiOnt9LCJyYW5kb20iOiIzZTFjYTBmMjkxMGRkNmVkYTY5M2Y2ZDFlODAyYTdmYyJ9.IiQkMkHUAq2AzlhwHkaLyXBMDycStf--_gtWm1ZCQadw9IFWeaJakTNiXLE4PNPnm-cPYi63f1vPUfEy-lyo_Q}{Zenodo}, thus contributing to the scientific community for further studies and applications in the field of natural language processing and collaborative software development.
+\begin{figure}[H] 
+    \centering
+        \includegraphics[width=\linewidth]{figures/schemaMining.png}
+        \caption{Workflow of the data extraction and storage process}       
+
+\end{figure}
+\subsection{Choice of repositories}
+The initial selection focused on projects written in Java, chosen for its popularity and significant number of pull requests. This language guarantees a \textbf{rich and relevant database}, since well-known projects in Java tend to have an active community and significant pull requests.
+To ensure the quality of the projects, I initially set a minimum threshold of stars of ( $\geq 1000$ ). Repositories with a high number of stars are usually ``famous'', have an \textbf{active community} and generate more \textbf{relevant} and high-quality pull requests.
+Subsequently, to \textbf{enlarge the dataset} while maintaining a good level of quality, the threshold was lowered to \( \geq 500 \) stars.
+In addition to the star threshold, I introduced a filter based on the number of forks, requiring it to be $> 50$. This criterion ensures that the repositories \textbf{have been used and adapted} by other developers, indicate a certain \textbf{level of trust} and usefulness of the project.
+
+Applying these criteria, I obtained a total of \textbf{3539 projects}.
+To maintain a \textbf{high standard of data quality}, an additional filter was introduced: only repositories with \textbf{more than 20 pull requests} were retained.
+This choice is motivated by the desire to represent \textbf{active projects} and with a consistent workflow, guarantee a \textbf{sufficient amount of data} to effectively train the language model.
+After a thorough filtering and refinement process, the initial set of repositories was reduced to 507 projects. However, during the data mining phase, the extraction was intentionally stopped at 246 repositories. This is because the amount of data collected turned out to be more than sufficient for the project goals. Therefore, the final dataset is composed of \textbf{246 repositories}, each selected based on stringent criteria, such as a \textbf{minimum number of stars} (\( \geq 500 \)) and a \textbf{high number of pull requests} (\( > 20 \)).
+These projects ensure a high-quality dataset, useful for representing \textbf{software development practices} in real contexts and for \textbf{training} the language model.
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=\linewidth]{figures/logo/distribuzione_stelle.png}
+        \caption{Stars distribution on final dataset}       
+\end{figure}
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=\linewidth]{figures/logo/DistribuzioneRepository.png}
+        \caption{pull requests distribution on final dataset}       
+\end{figure}
+This figure shows the distribution of repositories by the number of pull requests (PRs), divided into different ranges. Most repositories have PRs between 100 and 5000, with a significant peak in the 1000-2500 PR range. This suggests that a significant portion of open source projects have moderate development activity and receive regular user contributions.
+
+A decrease in the number of repositories is observed both in the lower PR ranges (20-50 PRs) and in the very high PR ranges (over 5000 PRs). A few repositories have extremely high PRs, reaching up to the 70000-80000 PR range. This phenomenon, known as the "long tail distribution", is typical for open source projects, where a few popular projects attract high contributions, while most repositories remain at lower levels of activity.
+
+The higher ranges, i.e. those above 10000 PRs, represent the most active repositories and probably the most relevant for the community. These projects can be considered core projects within the open source ecosystem, as they demonstrate high community involvement and participation.
+
+In summary, this distribution reflects a characteristic structure of the open source community, where a few core projects receive a lot of attention and contributions, while most projects remain in a less active state.
+\subsection{Dataset structure}
+The dataset is composed of two collections:
+The first one containing all the names of the processed repositories,
+the second collection contains all the pull requests, saved individually and associated with their respective repository, thus creating a relationship and aggregating the relevant information:
+\begin{figure}[H] 
+    \centering
+        \includegraphics[width=\linewidth]{figures/esempioDataset2.png}
+        \caption{Data structure for each pull request}
+\end{figure}
+\textbf{\_id:} Unique id automatically generated for each document.
+\newline
+\textbf{repository\_id:} Reference to the repository associated with the pull request.
+\newline
+\textbf{PR Title:} Indicates the main focus or change introduced in the pull request.
+\newline
+\textbf{PR Message (Body):} Provides a detailed description of the content and changes made in the PR.
+\newline
+\textbf{PR Diff:} Shows the changes made to the code, represented by the diff (including additions, changes, and removals of lines).
+\newline
+\textbf{Commit Message:} Describes the major change in the code, associated with the first commit of the PR.
+\newline
+\textbf{Closed Issues:} If the pull request closes one or more issues, those issues are logged and associated with the PR, with the issue number and title.
+\newline
+\textbf{Issue Number:} The associated issue ID number, if any.
+\newline
+\textbf{Issue Close Date:} The date and time the issue was closed, if applicable.
+\newline
+\textbf{Issue Comments:} Any comments logged about the issue, providing additional detail or context.
+\newline
+\textbf{Pull Request Creation Date:} The date and time the pull request was created.
+\newline
+This structure allows to maintain a high granularity of information, facilitating the training of the model and the subsequent analysis of the results.
+\section{Common experimental setup}
+For all experiments, the training and testing sets were split 80-20. 20 repositories were tested, resulting in a total of 2959 title generations for each configuration.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        \textbf{Repository Name} & \textbf{Number of generations(Test set)} \\
+        \hline
+        phishman3579/java-algorithms-implementation & 26 \\
+        spring-cloud/spring-cloud-netflix & 128 \\
+        liquibase/liquibase & 200 \\
+        apache/nifi & 200 \\
+        discord-jda/JDA & 200 \\
+        bitcoinj/bitcoinj & 200 \\
+        emacs-lsp/lsp-mode & 200 \\
+        GeyserMC/Geyser & 189 \\
+        DiUS/java-faker & 47 \\
+        diffplug/spotless & 198 \\
+        apache/lucene-solr & 200 \\
+        micrometer-metrics/micrometer & 200 \\
+        saysky/ForestBlog & 8 \\
+        spring-cloud/spring-cloud-gateway & 104 \\
+        dependabot/dependabot-core & 200 \\
+        langchain4j/langchain4j & 134 \\
+        pmd/pmd & 200 \\
+        zq$2599$/blog\_demos & 109 \\
+        TheoKanning/openai-java & 16 \\
+        apache/calcite & 200 \\
+        \hline
+    \end{tabular}
+    \caption{Number of documents per repository}
+    \label{tab:repository_document_count}
+\end{table}
+To ensure a comprehensive evaluation of the model, the test set includes repositories of varying sizes in terms of the number of pull requests. The selected repositories cover a range of domains, including cloud computing (e.g., spring-cloud-netflix), blockchain (bitcoinj), database management (apache/calcite and liquibase), and developer tools (pmd, micrometer-metrics, diffplug/spotless). This diversity helps evaluate the model's ability to generate pull request descriptions across different types of projects and coding practices.
+The dataset includes both large repositories with up to 200 test samples (e.g., liquibase, apache/nifi, dependabot-core) and smaller repositories with fewer than 50 samples (e.g., TheoKanning/openai-java, saysky/ForestBlog). This combination ensures that the evaluation takes into account both very active and important projects as well as smaller and less active projects, testing the model across different data distributions.
+\section{Configurations to generate titles}
+The metadata passed to the template for title generation, for all configurations, are: Body Message, Commit Message and Diff Details.
+Associated issues were not considered to not impact the experiment, since the issue field is an object that includes the issue title and other information, and the issue title tends to be very similar to the pull request title.
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Configuration} & \textbf{Model} & \textbf{Temperature} & \textbf{Max Tokens} & \textbf{Prompt}  \\ \hline
+CT1 & llama3.2 & 0.2 & 30 & One-Shot \\ \hline
+CT2 & llama3.2 & 0.2 & 30 & Few-Shot \\ \hline
+CT3 & llama3.2 & 0.2 & 30 & Zero-Shot \\ \hline
+CT4 & llama3.2 & 0.2 & 30 & Random Few-Shot \\ \hline
+\end{tabular}
+\caption{Configurations used in the experiments for title generation.}
+\end{table}
+The temperature was set to a low value to ensure greater consistency and accuracy in text generation. Temperature is a parameter that influences the creativity and variability of the responses generated by a language model. By setting the temperature to a low value, the model tends to generate more predictable and consistent responses, reducing the possibility of obtaining random or irrelevant responses. In this context, since the goal was to obtain relevant and accurate titles for the pull requests, it was preferable to keep the model focused on the most relevant information and minimize the introduction of unnecessary elements. Therefore, by limiting the number of tokens to a relatively low value, it was possible to generate concise and effective titles, avoiding that the model lingered in excessively long or uninformative descriptions.
+For \textbf{CT1,CT2} and \textbf{CT4} the prompt used is the following:
+\begin{minted}[bgcolor=gray!5, breaklines=true, fontsize=\small, frame=single, linenos=true]{python}
+ prompt = f"""
+        You are a model specifically designed to generate  pull request titles based on metadata provided. 
+        An example of Metadata and related title:
+        {retrieved_context}
+        Your task is to generate a meaningful title for the pull request that reflects the changes, fixes, or improvements described in the metadata. 
+        The metadata for the pull request's title that you must be generate includes:
+        - Body Message: {test_pr["body_message"]}
+        - Commit Message: {test_pr["commit_message"]}
+        - Diff Details: {test_pr["diff"]}
+        The format of the output should strictly be:
+        title: [your generated title]
+        Do not add explanations or descriptions beyond the title.
+        """
+\end{minted}
+In the case of \textbf{CT3}, since the experiment uses a \textit{zero-shot prompt}, the model does not have any specific prior information about the content of the pull requests. However, to improve the consistency and relevance of the generated title, it was decided to add some statistical information about the titles already existing in the repository. In particular, the following parameters derived from the titles of existing pull requests were provided to the model:
+
+\begin{itemize}
+\item The \textbf{average length of titles} of the pull requests in the repository.
+\item The \textbf{standard deviation} of the length of the titles.
+\item The \textbf{minimum length} and \textbf{maximum length} of the pull request titles.
+\end{itemize}
+
+This information was chosen to give the model an idea of the general characteristics of the titles within the repository, without introducing too much specific context. This approach is intended to guide the model in generating a title that is consistent with typical existing title lengths, while not providing explicit examples.
+
+The modified prompt for the model was structured as follows:
+\begin{minted}[bgcolor=gray!5, breaklines=true, fontsize=\small, frame=single, linenos=true]{python}
+ prompt = f"""
+        You are a model specifically designed to generate pull request titles based on metadata provided. Your task is to generate a meaningful title for the pull request that reflects the changes, fixes, or improvements described in the metadata. The metadata for the pull request's title that you must generate includes:
+        - Body Message: {test_pr["body_message"]}
+        - Commit Message: {test_pr["commit_message"]}
+        - Diff Details: {test_pr["diff"]}
+        
+        Additional information about existing titles in the repository:
+        - Mean length of titles: {media:.2f}
+        - Standard deviation of title lengths: {deviazione:.2f}
+        - Minimum title length: {min_len}
+        - Maximum title length: {max_len}
+        
+        The format of the output should strictly be:
+        title: [your generated title]
+        Do not add explanations or descriptions beyond the title.
+        """
+\end{minted}
+\section{Configurations to generate body message}
+The metadata passed to the
+template for body message generation, for all configurations, are: Title, Diff details and  associated Issues.
+The commit message was not used to avoid influencing the experiment, as the body message is often similar to the commit message.
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Configuration} & \textbf{Model} & \textbf{Temperature} & \textbf{Max Tokens} & \textbf{Prompt}  \\ \hline
+CB1 & llama3.2 & 0.3 & 150 & One-Shot \\ \hline
+CB2 & llama3.2 & 0.3 & 150 & Few-Shot \\ \hline
+CB3 & llama3.2 & 0.3 & 150 & Zero-Shot \\ \hline
+CB4 & llama3.2 & 0.3 & 150 & Random Few-Shot \\ \hline
+\end{tabular}
+\caption{Configurations used in the experiments for body message generation.}
+\end{table}
+Unlike the title generation, a slightly higher temperature was set for the body message. Preliminary tests showed that, for this type of generation, it is essential that the model is more creative and variable, since the body message is mainly written by users and its structure can vary depending on the type of repository. Furthermore, the maximum number of tokens was increased compared to the one used for the title, since body messages tend to be more complex and rich in information. For \textbf{CB1,CB2} and \textbf{CB4} the prompt used is the following:
+\begin{minted}[bgcolor=gray!5, breaklines=true, fontsize=\small, frame=single, linenos=true]{python}
+ prompt = f""" 
+         You are a model specifically designed to generate pull request body messages based on metadata provided.     
+         An example of Metadata and related body message:    {retrieved_context}  
+         Your task is to generate a meaningful body message for the pull request that reflects the changes, fixes, or improvements described in the metadata.     
+         The metadata for the pull request's body message that you must generate includes:    - Title: {test_pr['title']}   
+         - Commit Message: {test_pr["commit_message"]}   
+         - Diff Details: {test_pr["diff"]}    
+         - Issue: {test_pr["issue"]}    
+         Do not add explanations or descriptions beyond the body message.    
+         The format of the output should strictly be: 
+         body: [your generated body message]  
+         """
+\end{minted}
+The \textbf{CB3} prompt has been slightly modified for the same reasons as \textbf{CT3}, to ensure more accurate and context-appropriate generation.
+The modified prompt for the model was structured as follows:
+\begin{minted}[bgcolor=gray!5, breaklines=true, fontsize=\small, frame=single, linenos=true]{python}
+ prompt = f"""    
+         You are a model specifically designed to generate pull request body messages based on metadata provided.    
+         Your task is to generate a meaningful body message for the pull request that reflects the changes, fixes, or improvements described in the metadata.  
+         The metadata for the pull request's body message that you must generate includes:    
+         - Title: {test_pr['title']}  
+         - Diff Details: {test_pr["diff"]}  
+         - Issue: {test_pr["issue"]}    
+         Additional information about existing body messages in the repository:   
+         - Mean length of body messages: {media:.2f}
+         - Standard deviation of body messages lengths: {deviazione:.2f}   
+         - Minimum body message length: {min_len}    - Maximum body message length: {max_len}    Do not add explanations or descriptions beyond the body message.  
+         The format of the output should strictly be:
+         body: [your generated body message]
+         """
+\end{minted}

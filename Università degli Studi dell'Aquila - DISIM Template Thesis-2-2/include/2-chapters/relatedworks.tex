@@ -1,0 +1,13 @@
+\chapter{Related works}
+I have identified several research projects and studies similar to my thesis work; the following studies are particularly relevant, each for its own approach and methodology.
+\textit{Evidence-Based Commit Message Generation (EvidenCoM)}
+\citet{vegas_evidence-based_2024} propose 	exttt{EvidenCoM}, a systematic review of deep learning techniques for commit message generation. Their work aims to assess the effectiveness of existing tools rather than develop a new model, providing insights into best practices and evidence-based recommendations.
+\textit{Neural Machine Translation for Commit Messages}
+\citet{jiang_automatically_2017} adapt \textit{Neural Machine Translation (NMT)} to generate commit messages from diffs. While their approach effectively describes changes, it often lacks contextual information regarding the rationale behind a commit. They introduce a quality-assurance filter to mitigate low-quality outputs.
+\textit{Analysis and Enhancement of NMT-Based Generation}
+\citet{liu_neural-machine-translation-based_2018} analyze the performance of NMT-based commit message generation, identifying issues such as data noise and reliance on token-level similarities. They propose \textit{NNGen}, a nearest-neighbor-based approach that outperforms NMT in 	\texttt{BLEU} score and efficiency, suggesting alternative paths for automated commit message generation.
+\textit{FIRA: Graph-Based Code Change Representation}
+\citet{dong_fira_2022} introduce 	\textit{FIRA}, which represents code changes using fine-grained graphs. This approach improves commit message generation by explicitly capturing edit operations and token structures. 	\textit{FIRA} utilizes a graph neural network encoder and a transformer-based decoder, achieving superior results compared to previous methods.
+\textit{Commit Classification with Pre-Trained Language Models}
+\citet{ghadhab_augmenting_2021} focus on classifying commit messages into maintenance categories using a pre-trained \textit{BERT} model enhanced with fine-grained code change features. While their work is centered on classification rather than generation, their findings highlight the importance of incorporating structural code changes into NLP models.
+

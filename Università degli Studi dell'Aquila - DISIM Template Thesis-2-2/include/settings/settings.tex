@@ -1,4 +1,5 @@
 \usepackage[T1]{fontenc}		% Codifica dei font; T1 codifica di output dell'italiano e di lingue occidentali
+\usepackage{minted}
 \usepackage[utf8]{inputenc}		% Codifica degli input; abilita l'utilizzo di caratteri accentati
 \usepackage[english]{babel}		% Set the languages; the last one is the main language
 \usepackage{geometry}			% Allow to change the margin
@@ -28,7 +29,8 @@
 \usepackage{rotfloat}			% costruisce un ponte tra i pacchetti float e rotating
 \usepackage{amsmath} 			% Equations
 \usepackage{amssymb}			% Mathematical Symbols
-\usepackage{cancel}                     % Simplification Cancellation
+\usepackage{cancel}  
+% Simplification Cancellation
 \usepackage{mleftright}
 \usepackage{listings}                   % Codes
 \definecolor{lstgreen}{rgb}{0,0.6,0}
@@ -103,8 +105,10 @@
 %        captionpos=b,                     % b=bottom
 %        backgroundcolor=\color{white},
 %        identifierstyle=\color{black},
-\bibliographystyle{abbrv} % abbrv --> [1], [2], ecc.
-%\bibliographystyle{unsrtnat} 
+%\bibliographystyle{abbrv} % abbrv --> [1], [2], ecc.
+\bibliographystyle{plainnat}  % This supports author-year citations
+
+%\bibliographystyle{authortitle} 
 % ---------------------------------------- Dedication ------------------------------------------ %
 \newenvironment{dedication}
 {
